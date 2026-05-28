@@ -1,0 +1,1 @@
+# Append-only audit log. Each approval/submit event is one JSON object per line.

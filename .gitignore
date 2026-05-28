@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build output
+dist/
+build/
+.next/
+out/
+*.tsbuildinfo
+
+# Env / secrets
+.env
+.env.local
+.env.*.local
+*.pem
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+
+# Logs / coverage
+*.log
+npm-debug.log*
+pnpm-debug.log*
+coverage/
+.nyc_output/
+
+# Planning scratch that isn't intended to be shared
+.copilot-tracking/scratch/
