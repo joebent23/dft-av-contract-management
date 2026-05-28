@@ -1,0 +1,122 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ODCS Data Contract (PoC subset)",
+  "description": "Permissive ODCS v3.0.2 schema for DFT-AV PoC validation. Requires kind, apiVersion, and description.",
+  "type": "object",
+  "required": ["kind", "apiVersion"],
+  "properties": {
+    "kind": {
+      "type": "string",
+      "enum": ["DataContract"]
+    },
+    "apiVersion": {
+      "type": "string"
+    },
+    "uuid": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "active", "deprecated", "retired"]
+    },
+    "description": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "domain": {
+      "type": "string"
+    },
+    "dataProduct": {
+      "type": "string"
+    },
+    "tenant": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "contactInfo": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "physicalName": { "type": "string" },
+          "description": { "type": "string" },
+          "properties": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string" },
+                "description": { "type": "string" },
+                "fields": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": { "type": "string" },
+                      "type": { "type": "string" },
+                      "description": { "type": "string" },
+                      "required": { "type": "boolean" },
+                      "primaryKey": { "type": "boolean" },
+                      "unique": { "type": "boolean" },
+                      "examples": { "type": "array" },
+                      "tags": { "type": "array", "items": { "type": "string" } }
+                    },
+                    "additionalProperties": true
+                  }
+                }
+              },
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "quality": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "sla": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "infrastructure": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "terms": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "pocMeta": {
+      "type": "object",
+      "properties": {
+        "submittingAgency": { "type": "string" },
+        "submissionType": { "type": "string" },
+        "status": {
+          "type": "string",
+          "enum": ["draft", "pending_approval", "published"]
+        },
+        "submittedAt": { "type": "string" },
+        "submittedBy": { "type": "string" },
+        "approvedAt": { "type": "string" },
+        "approvedBy": { "type": "string" }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

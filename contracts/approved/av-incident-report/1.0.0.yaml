@@ -1,0 +1,77 @@
+apiVersion: v3.0.2
+kind: DataContract
+id: av-incident-report
+name: AV Incident Report
+version: 1.0.0
+status: active
+description:
+  purpose: |
+    Standardised report submitted by AV operators to DfT when an autonomous
+    vehicle is involved in a road incident, per the AV Act 2024 reporting duties.
+  usage: |
+    Consumed by DfT analytics, the safety regulator pipeline, and downstream
+    APIM consumers polling the approved contracts index.
+  limitations: |
+    PoC schema — field names are indicative only and have not been ratified by
+    the regulator. Not for production ingestion.
+team:
+  - username: joebent23
+    role: owner
+servers:
+  - server: raw-github
+    type: custom
+    description: Approved contract file served from raw.githubusercontent.com
+schema:
+  - name: IncidentReport
+    physicalName: incident_report
+    properties:
+      - name: incidentId
+        logicalType: string
+        required: true
+        description: Globally unique incident identifier (UUID v4).
+      - name: occurredAt
+        logicalType: date
+        required: true
+        description: ISO-8601 UTC timestamp of when the incident occurred.
+      - name: operatorId
+        logicalType: string
+        required: true
+        description: Registered AV operator identifier.
+      - name: vehicleVin
+        logicalType: string
+        required: true
+        description: Vehicle Identification Number of the AV involved.
+      - name: location
+        logicalType: object
+        required: true
+        description: Geographic location of the incident.
+        properties:
+          - name: lat
+            logicalType: number
+            required: true
+            description: WGS-84 latitude in decimal degrees.
+          - name: lon
+            logicalType: number
+            required: true
+            description: WGS-84 longitude in decimal degrees.
+      - name: severity
+        logicalType: string
+        required: true
+        description: Incident severity. One of minor | major | fatal.
+      - name: narrative
+        logicalType: string
+        required: false
+        description: Free-text operator narrative of the incident.
+quality:
+  - rule: occurredAt must be within last 72 hours of submission
+    severity: error
+  - rule: severity must be one of minor, major, fatal
+    severity: error
+pocMeta:
+  submittingAgency: VCA
+  submissionType: av-incident-report
+  status: published
+  submittedAt: 2026-05-29T10:00:00Z
+  submittedBy: joebent23
+  approvedAt: 2026-05-29T10:05:00Z
+  approvedBy: joebent23

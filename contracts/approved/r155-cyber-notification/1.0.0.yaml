@@ -1,0 +1,87 @@
+apiVersion: v3.0.2
+kind: DataContract
+id: r155-cyber-notification
+name: UN R155 Cybersecurity Incident Notification
+version: 1.0.0
+status: active
+description:
+  purpose: |
+    Cybersecurity incident notification submitted by vehicle manufacturers to
+    the UK type-approval authority under UN Regulation No. 155 (CSMS), covering
+    incidents affecting vehicles or vehicle types approved for UK use.
+  usage: |
+    Consumed by DfT cyber-resilience analytics and shared with the type-approval
+    authority for ongoing CSMS conformity oversight.
+  limitations: |
+    PoC schema — field names indicative only. Not a substitute for the
+    manufacturer's formal R155 reporting obligations.
+team:
+  - username: joebent23
+    role: owner
+servers:
+  - server: raw-github
+    type: custom
+    description: Approved contract file served from raw.githubusercontent.com
+schema:
+  - name: R155CyberNotification
+    physicalName: r155_cyber_notification
+    properties:
+      - name: notificationId
+        logicalType: string
+        required: true
+        description: Globally unique notification identifier (UUID v4).
+      - name: manufacturerId
+        logicalType: string
+        required: true
+        description: Vehicle manufacturer identifier (e.g. WMI or type-approval holder code).
+      - name: vehicleTypeApprovalId
+        logicalType: string
+        required: true
+        description: UK / UNECE type-approval number affected by the incident.
+      - name: vehicleVin
+        logicalType: string
+        required: false
+        description: Specific VIN if the incident is vehicle-specific; omit for fleet-wide events.
+      - name: detectedAt
+        logicalType: date
+        required: true
+        description: ISO-8601 UTC timestamp of when the cyber incident was detected.
+      - name: severity
+        logicalType: string
+        required: true
+        description: Incident severity. One of low | medium | high | critical.
+      - name: cveReferences
+        logicalType: array
+        required: false
+        description: Optional list of related CVE identifiers (e.g. CVE-2026-1234).
+        items:
+          logicalType: string
+      - name: affectedSystems
+        logicalType: array
+        required: true
+        description: In-vehicle systems or ECUs affected (e.g. telematics, infotainment, ADAS).
+        items:
+          logicalType: string
+      - name: mitigationStatus
+        logicalType: string
+        required: true
+        description: Mitigation lifecycle state. One of open | in_progress | mitigated | closed.
+      - name: narrative
+        logicalType: string
+        required: false
+        description: Free-text manufacturer narrative of the incident and response.
+quality:
+  - rule: detectedAt must not be in the future
+    severity: error
+  - rule: severity must be one of low, medium, high, critical
+    severity: error
+  - rule: mitigationStatus must be one of open, in_progress, mitigated, closed
+    severity: error
+pocMeta:
+  submittingAgency: VCA
+  submissionType: r155-cyber-notification
+  status: published
+  submittedAt: 2026-05-29T10:00:00Z
+  submittedBy: joebent23
+  approvedAt: 2026-05-29T10:05:00Z
+  approvedBy: joebent23

@@ -1,4 +1,21 @@
 {
-  "generatedAt": null,
-  "contracts": {}
+  "generatedAt": "2026-05-29T10:05:00Z",
+  "contracts": {
+    "av-incident-report": {
+      "name": "AV Incident Report",
+      "submittingAgency": "VCA",
+      "latest": "1.0.0",
+      "versions": ["1.0.0"],
+      "updatedAt": "2026-05-29T10:05:00Z",
+      "rawUrl": "https://raw.githubusercontent.com/joebent23/dft-av-contract-management/main/contracts/approved/av-incident-report/1.0.0.yaml"
+    },
+    "r155-cyber-notification": {
+      "name": "UN R155 Cybersecurity Incident Notification",
+      "submittingAgency": "VCA",
+      "latest": "1.0.0",
+      "versions": ["1.0.0"],
+      "updatedAt": "2026-05-29T10:05:00Z",
+      "rawUrl": "https://raw.githubusercontent.com/joebent23/dft-av-contract-management/main/contracts/approved/r155-cyber-notification/1.0.0.yaml"
+    }
+  }
 }
